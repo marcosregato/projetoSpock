@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +15,11 @@ public class UsuarioDao{
 	
 	Statement stmt = null;
 	ConnectionSQLite connection = new ConnectionSQLite();
-	stmt = connection.createConnection();
 
 	public void salvarUsuario(){
 
 		try {
+			stmt = (Statement) connection.createConnection();
 			String query ="";
 			stmt.executeUpdate(query);
 
@@ -69,18 +70,31 @@ public class UsuarioDao{
 	
 	public List<UserModel> listarUsuario(){
 
-		try {
+		try{
 			String query ="";
-			stmt.executeUpdate(query);
 
-			connection.createConnection().commit();
+			ResultSet rs = stmt.executeQuery( query );
+			ArrayList<UserModel> listUsuario = new ArrayList<>();
+			UserModel usuario = new UserModel();
+			while(rs.next()) {
+				
+				usuario.setId(rs.getInt("id"));
+				usuario.setNome(rs.getString("nome"));
+			}
 			
+			listUsuario.add(usuario);
+			rs.close();
 			stmt.close();
 			connection.createConnection().close();
+			
+			return listUsuario;
 
 		} catch ( Exception e ) {
 			logger.info( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
 		}
+		
+		return null;
 	}
 	
 	
@@ -98,7 +112,7 @@ public class UsuarioDao{
 		} catch ( Exception e ) {
 			logger.info( e.getClass().getName() + ": " + e.getMessage() );
 		}
-	}
+	} 
 	
 	public boolean buscarUsuario(String user, String pass){
 
@@ -114,5 +128,7 @@ public class UsuarioDao{
 		} catch ( Exception e ) {
 			logger.info( e.getClass().getName() + ": " + e.getMessage() );
 		}
+		
+		return false;
 	}
 } 

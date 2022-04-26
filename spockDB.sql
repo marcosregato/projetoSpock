@@ -1,11 +1,18 @@
-create database spockDB;
+--create database spockDB;
 
 create table usuario(
-	id integer primary key not null,
-	nome varchar(255);
+	id int NOT NULL PRIMARY KEY,
+	nome varchar(255)
 );
 
 create table produto(
-	id integer primary key not null,
-	nome varchar(255);
+	id int NOT NULL PRIMARY KEY,
+	nome varchar(255)
+);
+
+create table permissao(
+	id int NOT NULL PRIMARY KEY,
+	id_usuario int,
+	tipo varchar(200),
+	FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
