@@ -24,6 +24,7 @@ public class ProdutoDao{
 			stmt.executeUpdate(query);
 
 			connection.createConnection().commit();
+			//teste
 			
 			stmt.close();
 			connection.createConnection().close();
