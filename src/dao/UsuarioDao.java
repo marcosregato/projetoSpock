@@ -11,7 +11,7 @@ import model.UserModel;
 
 public class UsuarioDao{
 	
-	static Logger logger = Logger.getLogger(UsuarioDao.class);
+	private final static Logger logger = Logger.getLogger(UsuarioDao.class.getName());
 	
 	Statement stmt = null;
 	ConnectionSQLite connection = new ConnectionSQLite();

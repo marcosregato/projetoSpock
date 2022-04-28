@@ -1,18 +1,25 @@
---create database spockDB;
+--CREATE database spockDB;
 
-create table usuario(
-	id int NOT NULL PRIMARY KEY,
-	nome varchar(255)
-);
+--CREATE TABLE usuario(
+--	id int NOT NULL PRIMARY KEY,
+--	nome VARCHAR(255)
+--);
 
-create table produto(
-	id int NOT NULL PRIMARY KEY,
-	nome varchar(255)
-);
+--CREATE TABLE produto(
+--	id int NOT NULL PRIMARY KEY,
+--	nome VARCHAR(255),
+--	tipo VARCHAR(200)
+--);
 
-create table permissao(
-	id int NOT NULL PRIMARY KEY,
-	id_usuario int,
-	tipo varchar(200),
-	FOREIGN KEY (id_usuario) REFERENCES usuario(id)
-);
+--CREATE TABLE permissao(
+--	id int NOT NULL PRIMARY KEY,
+--	id_usuario int,
+--	tipo VARCHAR(200),
+--	FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+--);
+
+--CREATE TABLE preco(
+--	id int NOT NULL PRIMARY KEY,
+--	id_produto int,
+--	valor VARCHAR(200),
+--	FOREIGN KEY (id_produto) REFERENCES produto(id));

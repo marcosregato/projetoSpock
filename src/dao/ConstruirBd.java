@@ -11,7 +11,6 @@ import config.Config;
 
 public class ConstruirBd {
 
-
 	static Logger logger = Logger.getLogger(UsuarioDao.class);
 
 	Connection c = null;
@@ -23,7 +22,9 @@ public class ConstruirBd {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:"+ config.configBD());
+			System.out.println(config.configBD());
+			
+			c = DriverManager.getConnection("jdbc:sqlite:"+ config.configBD()+"spockDB.db");
 		} catch ( Exception e ) {
 			logger.info( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
@@ -37,22 +38,32 @@ public class ConstruirBd {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:"+ config.configBD());
 			logger.info("Opened database successfully");
+			
 			String sql = "create table usuario( " +
-					"id int NOT NULL PRIMARY KEY," +
-					"nome varchar(255)" +
+						"id int NOT NULL PRIMARY KEY," +
+						"nome varchar(255)" +
 					");" +
 
 					"create table produto(" +
-					"id int NOT NULL PRIMARY KEY," +
-					"nome varchar(255)" +
+						"id int NOT NULL PRIMARY KEY," +
+						"nome varchar(255)," +
+						"tipo varchar(200)" +
 					");" +
 
 					"create table permissao(" +
-					"id int NOT NULL PRIMARY KEY," +
-					"id_usuario int," +
-					"tipo varchar(200)," +
-					"FOREIGN KEY (id_usuario) REFERENCES usuario(id)" +
+						"id int NOT NULL PRIMARY KEY," +
+						"id_usuario int," +
+						"tipo varchar(200)," +
+						"FOREIGN KEY (id_usuario) REFERENCES usuario(id)" +
+					");"+
+					
+					"create table preco("+
+						"id int NOT NULL PRIMARY KEY,"+
+						"id_produto int,"+
+						"valor varchar(200),"+
+						"FOREIGN KEY (id_produto) REFERENCES produto(id)"+
 					")";
+			
 			stmt.executeUpdate(sql);
 			stmt.close();
 			c.close();

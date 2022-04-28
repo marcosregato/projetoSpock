@@ -22,4 +22,32 @@ public class ValidarDado{
 		}
 		return false;
 	}
+	
+	/*
+	 * Validar campo texto que nao pode ser vazio
+	 * 
+	 * @return false
+	 * */
+	public boolean validarCampoTxtVazio(String valor) {
+		boolean expression = true;
+		if(valor.isEmpty()) {
+			expression =  false;
+		}
+		return expression;
+		
+	}
+	
+	/*
+	 * Validar campo numerico que nao pode ser vazio
+	 * 
+	 * @return false
+	 * */
+	public boolean validarCampoTxtNumb(int valor) {
+		boolean expression = true;
+		if(valor <= 0) {
+			expression =  false;
+		}
+		return expression;
+		
+	}
 }
