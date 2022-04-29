@@ -31,8 +31,11 @@ public class Config{
 
 	}
 
+	/*
+	 * Retorna o caminho do diretorio
+	 * */
 
-	public String configBD(){
+	public String getPathFile(){
 
 		String nomeSO = System.getProperty("os.name");
 
@@ -42,4 +45,35 @@ public class Config{
 			return caminhoLinux;
 		}
 	}
+	
+	/*
+	 * Validar se o arquivo spockDB.db foi criado
+	 * 
+	 * @return false
+	 * */
+	//TODO arrumar esse metodo
+	public boolean validarArquivoDB() {
+		File file1 = new File(caminhoLinux+"spock.db");
+		System.out.println(file1.exists());
+		boolean expression = true;
+		if(file1.exists()) {
+			expression =  false;
+		}
+		return expression;
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

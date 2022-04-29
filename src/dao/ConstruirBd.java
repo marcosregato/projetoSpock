@@ -22,9 +22,9 @@ public class ConstruirBd {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			System.out.println(config.configBD());
+			System.out.println(config.getPathFile());
 			
-			c = DriverManager.getConnection("jdbc:sqlite:"+ config.configBD()+"spockDB.db");
+			c = DriverManager.getConnection("jdbc:sqlite:"+ config.getPathFile()+"spockDB.db");
 		} catch ( Exception e ) {
 			logger.info( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
@@ -36,33 +36,31 @@ public class ConstruirBd {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:"+ config.configBD());
+			c = DriverManager.getConnection("jdbc:sqlite:"+ config.getPathFile()+"spockDB.db");
 			logger.info("Opened database successfully");
 			
-			String sql = "create table usuario( " +
-						"id int NOT NULL PRIMARY KEY," +
-						"nome varchar(255)" +
-					");" +
-
-					"create table produto(" +
-						"id int NOT NULL PRIMARY KEY," +
-						"nome varchar(255)," +
-						"tipo varchar(200)" +
-					");" +
-
-					"create table permissao(" +
-						"id int NOT NULL PRIMARY KEY," +
-						"id_usuario int," +
-						"tipo varchar(200)," +
-						"FOREIGN KEY (id_usuario) REFERENCES usuario(id)" +
-					");"+
-					
-					"create table preco("+
-						"id int NOT NULL PRIMARY KEY,"+
-						"id_produto int,"+
-						"valor varchar(200),"+
-						"FOREIGN KEY (id_produto) REFERENCES produto(id)"+
-					")";
+			String sql = "CREATE table usuario( "
+					+ "id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,\n"
+					+ "	nome varchar(255)\n"
+					+ ");\n"
+					+ "CREATE table produto(\n"
+					+ "	id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,\n"
+					+ "	nome varchar(255),\n"
+					+ "	tipo varchar(200)\n"
+					+ ");\n"
+					+ "CREATE table permissao(\n"
+					+ "	id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,\n"
+					+ "	id_usuario INTEGER,\n"
+					+ "	tipo varchar(200),\n"
+					+ "	FOREIGN KEY (id_usuario) REFERENCES usuario(id)\n"
+					+ ");\n"
+					+ "CREATE table preco(\n"
+					+ "\n"
+					+ "	id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,\n"
+					+ "	id_produto INTEGER NOT NULL,\n"
+					+ "	valor varchar(200),\n"
+					+ "	FOREIGN KEY (id_produto) REFERENCES produto(id)\n"
+					+ ")";
 			
 			stmt.executeUpdate(sql);
 			stmt.close();

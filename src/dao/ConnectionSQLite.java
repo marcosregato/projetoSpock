@@ -14,7 +14,7 @@ public class ConnectionSQLite{
     private Config config = new Config();
     
     public Connection createConnection() {
-        String dbUrl = "jdbc:sqlite:"+ config.configBD();
+        String dbUrl = "jdbc:sqlite:"+ config.getPathFile();
         Connection con = null;
         try {
             Class.forName("org.sqlite.JDBC");
